@@ -1,0 +1,14 @@
+import urllib
+import urllib2
+url=raw_input("Enter URL:")    
+response = urllib2.urlopen(url)
+page_source = response.read()
+header=page_source.find("'header-img\'")
+urlbegin=header+18
+urlend=page_source[header+18:].find('"')
+after=page_source[urlbegin:urlbegin+urlend]
+
+resource = urllib.urlopen(after)
+output = open("alien_image_file.jpg","wb")
+output.write(resource.read())
+output.close()
